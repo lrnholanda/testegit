@@ -30,6 +30,41 @@ func (x arquiteto) oibomdia() {
 
 }
 
+type gente interface {
+	oibomdia()
+}
+
+func serhumano(g gente) {
+	g.oibomdia()
+	switch g.(type) {
+	case dentista:
+		fmt.Println("Eu ganho:", g.(dentista).salário)
+	case arquiteto:
+		fmt.Println("Eu construo:", g.(arquiteto).tipodeconstrução)
+	}
+}
+
 func main() {
-	fmt.Println("Hello!")
+	mrdente := dentista{
+		pessoa: pessoa{
+			nome:      "Mister Dente",
+			sobrenome: "da Silva",
+			idade:     50,
+		},
+		dentesarrancados: 8973,
+		salário:          34567,
+	}
+
+	mrpredio := arquiteto{
+		pessoa: pessoa{
+			nome:      "Mister Prédio",
+			sobrenome: "Mendes",
+			idade:     30,
+		},
+		tipodeconstrução: "Hospicios",
+		tamanhodaloucura: "Muita",
+	}
+
+	serhumano(mrdente)
+	serhumano(mrpredio)
 }
